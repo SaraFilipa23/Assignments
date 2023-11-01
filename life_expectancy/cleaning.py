@@ -13,8 +13,10 @@ def clean_data(country):
     """
     data = pd.read_csv('life_expectancy/data/eu_life_expectancy_raw.tsv', sep='\t')
 
-    data[['unit', 'sex', 'age', 'region']] = data['unit,sex,age,geo\\time'].str.split(
-        ',', expand=True)
+
+    data[['unit', 'sex', 'age', 'region']] = data['unit,sex,age,geo\\time'
+
+    ].str.split(',', expand=True)
 
     data.drop(columns=data.columns[0], inplace=True)
 
@@ -49,4 +51,3 @@ def main():
 
 if __name__ == '__main__':  # pragma: no cover
     main()
-
