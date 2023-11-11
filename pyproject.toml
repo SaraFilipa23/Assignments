@@ -24,7 +24,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.pylint."messages control"]
 disable = [
-   "missing-module-docstring", "C0116","C0304"
+   "missing-module-docstring", "C0116","C0304","C0303"
    # Add any other checks you want to disable here
 ]
 

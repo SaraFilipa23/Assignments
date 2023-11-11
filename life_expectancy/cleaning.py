@@ -25,7 +25,8 @@ def clean_data(data,country):
             ',', expand=True)
     data.drop(columns=data.columns[0], inplace=True)
 
-    melted_df = pd.melt(data, id_vars=['unit', 'sex', 'age', 'region'], var_name='year', value_name='value')
+    melted_df = pd.melt(data, id_vars=['unit', 'sex', 'age', 'region'], 
+var_name='year', value_name='value')
     melted_df['value'] = melted_df['value'].str.replace(r'[^0-9.]', '', regex=True)
     melted_df['value'] = melted_df['value'].replace('', np.nan)
     melted_df['year'] = melted_df['year'].astype(int)
