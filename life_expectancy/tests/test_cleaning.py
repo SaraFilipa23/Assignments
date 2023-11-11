@@ -7,9 +7,9 @@ from . import OUTPUT_DIR
 
 def test_clean_data(pt_life_expectancy_expected):
     """Run the `clean_data` function and compare the output to the expected output"""
-    data = load_data()
-    cleaned_data = clean_data(data)
-    save_data(cleaned_data, "PT")
+    raw_data = load_data()
+    cleaned_data = clean_data(raw_data, "PT")
+    save_data(cleaned_data)
 
     pt_life_expectancy_actual = pd.read_csv(
         OUTPUT_DIR / "pt_life_expectancy.csv"
