@@ -1,4 +1,4 @@
-[![CI](https://github.com/SaraFilipa23/Assignments/actions/workflows/CI.yml/badge.svg)](https://github.com/SaraFilipa23/Assignments/actions/workflows/CI.yml)  
+[![CI](https://github.com/SaraFilipa23/Assignments/actions/workflows/CI.yml/badge.svg)](https://github.com/SaraFilipa23/Assignments/actions/workflows/CI.yml)
 
 
 ## Foundations Learning Path Assignments
