@@ -62,3 +62,6 @@ def main():
 
 if __name__ == '__main__':  # pragma: no cover
     main()
+
+
+## vou por isto aqui para poder fazer commit e a Ines rever o meu codigo ##
