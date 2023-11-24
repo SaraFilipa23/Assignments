@@ -1,6 +1,9 @@
 import pandas as pd
 from life_expectancy.cleaning import clean_data, save_data
 
+#alteracoes 
+
+
 # Input Fixture
 def create_input_fixture():
     # Load raw data
