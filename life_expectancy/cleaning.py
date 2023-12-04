@@ -12,7 +12,7 @@ def load_data():
     df = pd.read_csv('life_expectancy/data/eu_life_expectancy_raw.tsv', sep='\t')
     return df 
 
-def clean_data(data,country):
+def clean_data(data, country):
     """
     Clean and process life expectancy data.
 
@@ -22,12 +22,17 @@ def clean_data(data,country):
     Returns:
         pd.DataFrame: The cleaned data.
     """
-    data[['unit', 'sex', 'age', 'region']] = data['unit,sex,age,geo\\time'].str.split(
-            ',', expand=True)
-    data.drop(columns=data.columns[0], inplace=True)
+    print("Columns in data:", data.columns)
+    
+    if 'unit,sex,age,geo\\time' in data.columns:
+        data[['unit', 'sex', 'age', 'region']] = data['unit,sex,age,geo\\time'].str.split(',', expand=True)
+        data.drop(columns=data.columns[0], inplace=True)
+    else:
+        print("Column 'unit,sex,age,geo\\time' not found in data.")
 
-    melted_df = pd.melt(data, id_vars=['unit', 'sex', 'age', 'region'], 
-var_name='year', value_name='value')
+    print("Columns after processing:", data.columns)
+
+    melted_df = pd.melt(data, id_vars=['unit', 'sex', 'age', 'region'], var_name='year', value_name='value')
     melted_df['value'] = melted_df['value'].str.replace(r'[^0-9.]', '', regex=True)
     melted_df['value'] = melted_df['value'].replace('', np.nan)
     melted_df['year'] = melted_df['year'].astype(int)
@@ -36,6 +41,7 @@ var_name='year', value_name='value')
     melted_df = melted_df.dropna(subset=['value'])
 
     return melted_df
+
 
 
 
