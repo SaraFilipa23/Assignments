@@ -9,7 +9,8 @@ def load_data():
     Returns:
         pd.DataFrame: The loaded raw data.
     """
-    return pd.read_csv('life_expectancy/data/eu_life_expectancy_raw.tsv', sep='\t')
+    df = pd.read_csv('life_expectancy/data/eu_life_expectancy_raw.tsv', sep='\t')
+    return df 
 
 def clean_data(data,country):
     """
@@ -35,6 +36,8 @@ var_name='year', value_name='value')
     melted_df = melted_df.dropna(subset=['value'])
 
     return melted_df
+
+
 
 def save_data(melted_df, filename='life_expectancy/data/pt_life_expectancy.csv'):
     """
@@ -63,5 +66,3 @@ def main():
 if __name__ == '__main__':  # pragma: no cover
     main()
 
-
-## vou por isto aqui para poder fazer commit e a Ines rever o meu codigo ##
