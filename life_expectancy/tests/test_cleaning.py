@@ -1,19 +1,32 @@
 """Tests for the cleaning module"""
+
 import pandas as pd
+import pytest
+from unittest.mock import patch
+from life_expectancy.tests.Fixtures_created import create_input_fixture, create_expected_fixture
+from life_expectancy.cleaning import clean_data, save_data, Region 
 
-from life_expectancy.cleaning import load_data, clean_data, save_data
-from . import OUTPUT_DIR
+# Fixture for input data
+@pytest.fixture
+def input_fixture(region=Region.PT):
+    return create_input_fixture()
 
+# Fixture for expected output
+@pytest.fixture
+def expected_fixture(input_fixture):
+    return create_expected_fixture(input_fixture)
 
-def test_clean_data(pt_life_expectancy_expected):
-    """Run the `clean_data` function and compare the output to the expected output"""
-    raw_data = load_data()
-    cleaned_data = clean_data(raw_data, "PT")
-    save_data(cleaned_data)
+# Test for clean_data function
+def test_clean_data(input_fixture, expected_fixture):
+    cleaned_data = clean_data(input_fixture, country=Region.PT)
+    pd.testing.assert_frame_equal(cleaned_data, expected_fixture)
 
-    pt_life_expectancy_actual = pd.read_csv(
-        OUTPUT_DIR / "pt_life_expectancy.csv"
-    )
-    pd.testing.assert_frame_equal(
-        pt_life_expectancy_actual, pt_life_expectancy_expected
-    )
+# Test for save_data function using mocking
+@patch('pandas.DataFrame.to_csv')
+def test_save_data(mock_to_csv, input_fixture):
+    # Call the function that saves the data
+    save_data(input_fixture)
+
+    # Assert that the to_csv method was called
+    mock_to_csv.assert_called_once_with('life_expectancy/data/pt_life_expectancy.csv', index=False)
+
