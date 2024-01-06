@@ -1,18 +1,16 @@
 import argparse
 import pandas as pd 
 import numpy as np 
-from life_expectancy.cleaning import load_data, clean_data
+from life_expectancy.cleaning import load_data, clean_data, Region 
 
 def create_input_fixture():
     data = load_data()
-    sample_data = data.sample(n=300, random_state=42)
+    sample_data = data.sample(n=300)
     sample_data.to_csv('life_expectancy/tests/fixtures/eu_life_expectancy_raw.tsv', sep='\t', index=False)
-    return sample_data
 
-def create_expected_fixture(input_fixture):
-    cleaned_data = clean_data(input_fixture, 'PT')
-    cleaned_data.to_csv('life_expectancy/tests/fixtures/eu_life_expectancy_expected.csv', index=False)
-    return cleaned_data
+def create_expected_fixture(input_fixture, country=Region.PT):
+    cleaned_data = clean_data(input_fixture, country)
+    cleaned_data.to_csv('life_expectancy/tests/fixtures/pt_life_expectancy_expected.csv', index=False)
 
 def main():
     input_fixture = create_input_fixture()
